@@ -31,7 +31,7 @@ const ServiceCard = ({ title, description, icon }: Props) => {
               object-cover
               group-hover:scale-[1.02] transition duration-300
             "
-          />+
+          />
         </div>
       </div>
 

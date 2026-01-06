@@ -20,6 +20,8 @@ const DoctorAppointment = () => {
     e.currentTarget.reset();
   };
 
+  const phoneNumber = "9676034783"; // 👈 Updated phone number
+
   return (
     <>
       {/* ================= HERO ================= */}
@@ -31,7 +33,6 @@ const DoctorAppointment = () => {
           backgroundPosition: "center",
         }}
       >
-        {/* <div className="absolute inset-0 bg-blue-900/80"></div> */}
         <div className="relative z-10 text-white">
           <p className="uppercase text-sm tracking-widest mb-2">
             Book Your Seat
@@ -48,8 +49,6 @@ const DoctorAppointment = () => {
 
           {/* LEFT – Doctor Info */}
           <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
-
-            {/* Doctor Image */}
             <img
               src={doctor.image}
               alt={doctor.name}
@@ -69,9 +68,10 @@ const DoctorAppointment = () => {
               committed to delivering high-quality medical care with compassion.
             </p>
 
-            <p className="text-3xl font-bold text-blue-700">
-              +84 789 1256
-            </p>
+            {/* 👇 Updated phone number */}
+            <a href={`tel:${phoneNumber}`} className="text-3xl font-bold text-blue-700 hover:underline">
+              {phoneNumber}
+            </a>
           </div>
 
           {/* RIGHT – FORM */}
@@ -80,7 +80,6 @@ const DoctorAppointment = () => {
               Book an Appointment
             </h3>
 
-            {/* Inline success message */}
             {success && (
               <div className="mb-6 p-4 rounded-md bg-green-100 text-green-700 font-medium">
                 ✅ Successfully booked your appointment!
@@ -95,40 +94,26 @@ const DoctorAppointment = () => {
                 type="text"
                 value={doctor.name}
                 readOnly
+                name="doctor"
                 className="border px-4 py-3 bg-gray-100 md:col-span-2"
               />
 
-              <input
-                type="date"
-                required
-                className="border px-4 py-3"
-              />
+              <input type="date" required name="date" className="border px-4 py-3" />
+              <input type="time" required name="time" className="border px-4 py-3" />
 
-              <input
-                type="time"
-                required
-                className="border px-4 py-3"
-              />
-
-              <input
-                type="text"
-                placeholder="Full Name"
-                required
-                className="border px-4 py-3"
-              />
-
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                required
-                className="border px-4 py-3"
-              />
+              <input type="text" placeholder="Full Name" required name="name" className="border px-4 py-3" />
+              <input type="tel" placeholder="Phone Number" required name="phone" className="border px-4 py-3" />
 
               <textarea
                 placeholder="Your Message"
                 rows={4}
+                name="message"
                 className="border px-4 py-3 md:col-span-2"
               ></textarea>
+
+              {/* 👇 Updated hidden phone field too if needed */}
+              <input type="hidden" name="_next" value="" />
+              <input type="hidden" name="_phone" value={phoneNumber} />
 
               <button
                 type="submit"
@@ -165,12 +150,16 @@ const DoctorAppointment = () => {
               successfully scheduled.
             </p>
 
+            {/* 👇 Updated phone number in popup if you want to show */}
+            <p className="text-sm text-gray-500 mb-4">Contact Number: {phoneNumber}</p>
+
             <button
               onClick={() => setShowPopup(false)}
               className="bg-blue-700 text-white px-6 py-2 rounded-md hover:bg-blue-800 transition"
             >
               OK
             </button>
+
           </div>
         </div>
       )}

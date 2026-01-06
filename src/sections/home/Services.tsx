@@ -4,7 +4,8 @@ import { services } from "../../data/services";
 
 const Services = () => {
   return (
-    <section className="pt-10 pb-20 bg-white">
+    <section className="p-0 m-0 bg-white"> 
+
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -14,7 +15,7 @@ const Services = () => {
         />
 
         {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 items-stretch mt-0">
           {services.map(service => (
             <div key={service.id} className="flex">
               <ServiceCard

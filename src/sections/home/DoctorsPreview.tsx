@@ -1,83 +1,61 @@
 import { useEffect, useRef } from "react";
 import DoctorCard from "../../Components/cards/DoctorCard";
 import { doctors } from "../../data/doctors";
+import { gsap } from "gsap";
 
-const DoctorsPreview = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+const DoctorsPreview: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
+    gsap.fromTo(
+      sectionRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
 
-    // Force start from beginning
-    container.scrollLeft = 0;
-
-    let scrollAmount = 0;
-    let animationFrame: number;
-
-    const scroll = () => {
-      scrollAmount += 0.4;
-      if (scrollAmount >= container.scrollWidth / 2) {
-        scrollAmount = 0;
-      }
-      container.scrollLeft = scrollAmount;
-      animationFrame = requestAnimationFrame(scroll);
-    };
-
-    animationFrame = requestAnimationFrame(scroll);
-
-    const stopScroll = () => cancelAnimationFrame(animationFrame);
-    const startScroll = () => (animationFrame = requestAnimationFrame(scroll));
-
-    container.addEventListener("mouseenter", stopScroll);
-    container.addEventListener("mouseleave", startScroll);
-
-    return () => {
-      cancelAnimationFrame(animationFrame);
-      container.removeEventListener("mouseenter", stopScroll);
-      container.removeEventListener("mouseleave", startScroll);
-    };
+    if (cardsRef.current) {
+      gsap.fromTo(
+        cardsRef.current.children,
+        { opacity: 0, y: 40, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.15, ease: "power3.out" }
+      );
+    }
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section
+      ref={sectionRef}
+      className="w-full bg-white px-4 py-12 overflow-hidden"
+    >
+      {/* HEADER */}
+      <div className="text-center mb-8 mt-2">
+        <p className="text-xs font-semibold uppercase tracking-[3px] text-pink-500 mb-2">
+          Trusted Care Team
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+          Meet Our Doctors
+        </h2>
+        <p className="text-gray-500 text-sm sm:text-base md:text-lg max-w-lg mx-auto">
+          Specialists chosen for skill, compassion, and excellence in patient care.
+        </p>
+      </div>
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <p className="text-sm font-semibold text-pink-600 uppercase tracking-wide mb-1">
-            Our Doctors
-          </p>
-
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-            Meet Our Qualified Specialists
-          </h2>
-
-          <p className="text-gray-500 text-sm sm:text-base">
-            A dedicated team committed to excellence in patient care.
-          </p>
-        </div>
-
-        {/* Auto Scroll Container */}
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide items-stretch"
-        >
-          {[...doctors, ...doctors].map((doc, index) => (
-            <div
-              key={index}
-              className="min-w-[260px] sm:min-w-[280px] md:min-w-[300px] flex"
-            >
-              <DoctorCard
-                id={doc.id}
-                image={doc.image}
-                name={doc.name}
-                specialty={doc.specialty}
-              />
-            </div>
-          ))}
-        </div>
-
+      {/* GRID 3×3 RESPONSIVE */}
+      <div
+        ref={cardsRef}
+        className="grid gap-6 w-full max-w-6xl mx-auto
+                   grid-cols-1 sm:grid-cols-2 md:grid-cols-3
+                   place-items-center"
+      >
+        {doctors.slice(0, 9).map((doc) => (
+          <div
+            key={doc.id}
+            className="w-full max-w-[240px] hover:-translate-y-2 transition-all duration-300 rounded-2xl border border-gray-200"
+          >
+            <DoctorCard id={doc.id} image={doc.image} name={doc.name} specialty={doc.specialty} />
+          </div>
+        ))}
       </div>
     </section>
   );
