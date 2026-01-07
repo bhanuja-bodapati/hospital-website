@@ -31,7 +31,7 @@ const DepartmentCard = ({ department }: Props) => {
         </p>
 
         <span className="inline-flex items-center text-blue-700 font-medium text-sm">
-          Learn More →
+          Learn More 
         </span>
       </div>
     </Link>

@@ -43,7 +43,7 @@ const DepartmentSingle = () => {
             to="/doctors"
             className="inline-block mt-8 bg-pink-600 text-white px-6 py-3 rounded-md hover:bg-pink-700 transition"
           >
-            Make an Appointment →
+            Make an Appointment 
           </Link>
         </div>
 
@@ -60,7 +60,7 @@ const DepartmentSingle = () => {
           <div className="mt-6 border-t pt-4">
             <p className="text-sm text-gray-500">Need Urgent Help?</p>
             <p className="text-lg font-bold text-blue-700">
-              +23-4565-56768
+              9676034783
             </p>
           </div>
         </aside>

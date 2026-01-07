@@ -29,28 +29,28 @@ const WhyChooseUs = () => {
 
           {/* Card 1 */}
           <div className="group bg-white/60 backdrop-blur-xl border border-white/20 rounded-[24px] p-6 shadow-md transition-all text-center w-full max-w-[260px] hover:scale-[1.08] hover:-translate-y-3 hover:shadow-xl hover:ring-4 ring-purple-400/30">
-            <div className="text-4xl mb-3 transition group-hover:rotate-12">🩺</div>
+            <div className="text-4xl mb-3 transition group-hover:rotate-12"></div>
             <h3 className="font-bold text-lg text-[#0a2540] mb-1">Expert Medical Care</h3>
             <p className="text-gray-700 text-sm">Access to 150+ experienced specialists delivering world-class treatment.</p>
           </div>
 
           {/* Card 2 */}
           <div className="group bg-white/60 backdrop-blur-xl border border-white/20 rounded-[24px] p-6 shadow-md transition-all text-center w-full max-w-[260px] hover:scale-[1.08] hover:-translate-y-3 hover:shadow-xl hover:ring-4 ring-green-400/30">
-            <div className="text-4xl mb-3 transition group-hover:rotate-12">🧠</div>
+            <div className="text-4xl mb-3 transition group-hover:rotate-12"></div>
             <h3 className="font-bold text-lg text-[#0a2540] mb-1">Cutting-Edge Tech</h3>
             <p className="text-gray-700 text-sm">Advanced diagnostic and treatment systems for precise and effective care.</p>
           </div>
 
           {/* Card 3 */}
           <div className="group bg-white/60 backdrop-blur-xl border border-white/20 rounded-[24px] p-6 shadow-md transition-all text-center w-full max-w-[260px] hover:scale-[1.08] hover:-translate-y-3 hover:shadow-xl hover:ring-4 ring-yellow-400/30">
-            <div className="text-4xl mb-3">💛</div>
+            <div className="text-4xl mb-3"></div>
             <h3 className="font-bold text-lg text-[#0a2540] mb-1">Patient-Centered Care</h3>
             <p className="text-gray-700 text-sm">Personalized treatment plans focused on comfort, recovery, and lifestyle.</p>
           </div>
 
           {/* Card 4 */}
           <div className="group bg-white/60 backdrop-blur-xl border border-white/20 rounded-[24px] p-6 shadow-md transition-all text-center w-full max-w-[260px] hover:scale-[1.08] hover:-translate-y-3 hover:shadow-xl hover:ring-4 ring-blue-400/30">
-            <div className="text-4xl mb-3">🛡️</div>
+            <div className="text-4xl mb-3"></div>
             <h3 className="font-bold text-lg text-[#0a2540] mb-1">Accredited Excellence</h3>
             <p className="text-gray-700 text-sm">ISO-certified systems ensuring the highest standards of safety & quality.</p>
           </div>

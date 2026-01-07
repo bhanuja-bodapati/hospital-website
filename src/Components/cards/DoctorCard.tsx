@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 interface DoctorCardProps {
   id: number;
@@ -8,37 +9,65 @@ interface DoctorCardProps {
   phone?: string;
 }
 
-const DoctorCard = ({ image, name, specialty, phone = "+91 63012 44567" }: DoctorCardProps) => {
+const DoctorCard = ({
+  id,
+  image,
+  name,
+  specialty,
+  phone = "9676034783",
+}: DoctorCardProps) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition flex flex-col overflow-hidden border border-gray-300 w-full h-[420px] max-w-[340px]">
+    <div className="bg-white rounded-2xl shadow-md transition flex flex-col overflow-hidden border border-gray-300 w-full h-[340px] group hover:scale-[1.04]">
 
-      {/* Image Box */}
-      <div className="h-[240px] w-full bg-gray-50 border-b border-gray-300 flex items-center justify-center">
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-contain"  // 👈 fits without stretch or crop
-        />
+      {/* ===== TOP ROW ===== */}
+      <div className="grid grid-cols-2 flex-1">
+
+        {/* LEFT – NAME + OCCUPATION + PHONE */}
+        <div className="p-5 border-r border-gray-200 flex flex-col items-center justify-center bg-gray-50">
+          
+          {/* ✅ Doctor name clickable & navigates to appointment */}
+          <h3
+            onClick={() => navigate(`/doctors/${id}/appointment`)}
+            className="text-xl font-bold text-gray-900 text-center hover:text-blue-600 transition cursor-pointer"
+          >
+            {name}
+          </h3>
+
+          <p className="text-sm text-gray-600 font-medium text-center mt-1">
+            {specialty}
+          </p>
+
+          <a
+            href={`tel:${phone}`}
+            className="text-blue-600 font-bold text-sm mt-2 hover:underline text-center"
+          >
+            {phone}
+          </a>
+        </div>
+
+        {/* RIGHT – IMAGE PANEL */}
+        <div className="bg-gray-100 w-full h-full overflow-hidden">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover object-center transition group-hover:scale-[1.02]"
+          />
+        </div>
+
       </div>
 
-      {/* Content */}
-      <div className="p-4 flex-1 flex flex-col justify-center items-center">
-        <h3 className="text-lg font-bold text-gray-900 text-center">{name}</h3>
-        <p className="text-sm text-pink-600 font-medium mt-1 text-center">{specialty}</p>
-
-        {/* Phone */}
-        <a href={`tel:${phone}`} className="text-blue-600 font-semibold text-sm mt-3 hover:underline">
-          {phone}
-        </a>
+      {/* ===== BUTTON ===== */}
+      <div className="p-4 flex items-center justify-center">
+        <Link
+          to={`/doctors/${id}/appointment`}
+          className="bg-blue-600 text-white px-10 py-3 font-semibold text-sm text-center rounded-xl transition hover:shadow-lg group-hover:scale-[1.03]"
+        >
+          Book an Appointment
+        </Link>
       </div>
 
-      {/* Button */}
-      <Link
-        to="/contact"
-        className="bg-blue-600 hover:bg-blue-700 transition text-white py-3 font-semibold text-sm text-center w-full border-t border-gray-300"
-      >
-        Book an Appointment
-      </Link>
     </div>
   );
 };

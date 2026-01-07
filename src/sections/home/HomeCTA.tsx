@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const HomeCTA = () => {
   return (
-    <section className="relative bg-gradient-to-r from-blue-600 to-indigo-600 py-20 text-center overflow-hidden">
+    <section className="relative bg-gradient-to-r from-blue-600 to-indigo-600 py-[2rem] text-center overflow-hidden">
 
       {/* Decorative circles */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-white/10 rounded-full blur-3xl"></div>
@@ -24,10 +24,10 @@ const HomeCTA = () => {
           className="
             inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-full font-semibold text-lg
             shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300
-            "
+          "
         >
           MAKE APPOINTMENT
-          <span className="text-2xl">→</span>
+          {/* <span className="text-2xl">→</span> */}
         </Link>
 
         {/* Sub info */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DoctorCard from "../../Components/cards/DoctorCard";
 import { doctors } from "../../data/doctors";
 import { gsap } from "gsap";
@@ -8,77 +8,112 @@ gsap.registerPlugin(ScrollTrigger);
 
 const DoctorsPreview: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]); // 👈 Correct type
+  const rowsRef = useRef<HTMLDivElement[]>([]);
+  const [expanded, setExpanded] = useState(false);
+
+  // Split into rows of 3
+  const chunkSize = 3;
+  const allRows = [];
+  for (let i = 0; i < doctors.length; i += chunkSize) {
+    allRows.push(doctors.slice(i, i + chunkSize));
+  }
+
+  // Show only 2 rows when collapsed
+  const visibleRows = expanded ? allRows : allRows.slice(0, 2);
 
   useEffect(() => {
-    // Section reveal animation
     gsap.fromTo(
       sectionRef.current,
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
     );
 
-    // Card reveal animations
-    cardsRef.current.forEach((card) => {
-      if (!card) return;
+    rowsRef.current.forEach((row) => {
+      if (!row) return;
       gsap.fromTo(
-        card,
-        { opacity: 0, y: 30, scale: 0.97 },
+        row.children,
+        { opacity: 0, y: 40, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 0.5,
+          stagger: 0.12,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: card,
-            start: "top 92%",
+            trigger: row,
+            start: "top 85%",
             toggleActions: "play none none reverse",
             invalidateOnRefresh: true,
           },
         }
       );
     });
-  }, []);
+  }, [expanded]);
 
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white pt-12 sm:pt-14 md:pt-16 lg:pt-20 pb-10 px-2 sm:px-4 md:px-6"
+      className="w-full bg-white pt-4 pb-12 px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20"
     >
 
       {/* HEADER */}
-      <div className="text-center mb-5">
-        <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[2px] text-pink-500 mb-1">
+      <div className="text-center mb-8">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-[2px] text-pink-500 mb-2">
           Trusted Care Team
         </p>
-        <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-900 mb-3">
           Meet Our Doctors
         </h2>
-        <p className="text-gray-500 text-[11px] sm:text-sm md:text-base max-w-md mx-auto">
-          Specialists chosen for skill, compassion, and excellence in patient care.
+        <p className="text-gray-500 text-sm sm:text-base md:text-lg max-w-xl mx-auto">
+          Specialists dedicated to compassionate healthcare and excellence in patient care.
         </p>
       </div>
 
-      {/* DOCTORS GRID */}
-      <div
-        className="grid gap-5 w-full max-w-6xl mx-auto
-                   grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3
-                   place-items-center"
-      >
-        {doctors.slice(0, 9).map((doc, i) => (
+      {/* GRID ROWS */}
+      <div className="w-full space-y-6">
+        {visibleRows.map((row, rowIndex) => (
           <div
-            key={doc.id}
-            ref={(el) => {
-              if (el) cardsRef.current[i] = el; // 👈 Correct ref assignment
-            }}
-            className="w-full max-w-[210px] sm:max-w-[230px] md:max-w-[240px] lg:max-w-[260px] rounded-2xl border border-gray-200 p-1
-                       transition-all duration-300 ease-out hover:scale-[1.12] hover:shadow-2xl"
+            key={rowIndex}
+            ref={(el) => { if (el) rowsRef.current[rowIndex] = el; }}
+            className="grid gap-5 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-stretch"
           >
-            <DoctorCard id={doc.id} image={doc.image} name={doc.name} specialty={doc.specialty} />
+            {row.map((doc) => (
+              <div key={doc.id} className="flex justify-center">
+                <DoctorCard
+                  id={doc.id}
+                  image={doc.image}
+                  name={doc.name}
+                  specialty={doc.specialty}
+                  phone="9676034783"
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>
+
+      {/* BUTTONS */}
+      <div className="text-center mt-10 flex justify-center gap-4">
+        {!expanded && allRows.length > 2 && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition"
+          >
+            View More
+          </button>
+        )}
+
+        {expanded && (
+          <button
+            onClick={() => setExpanded(false)}
+            className="bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-medium hover:bg-gray-300 transition"
+          >
+            View Less 
+          </button>
+        )}
+      </div>
+
     </section>
   );
 };

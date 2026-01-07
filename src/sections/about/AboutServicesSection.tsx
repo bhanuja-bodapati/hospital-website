@@ -79,12 +79,12 @@ const AboutServicesSection = () => {
 
         {/* ===== CTA BUTTON ===== */}
         <div className="text-center mt-12">
-          <Link
+          {/* <Link
             to="/services"
             className="inline-block bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold px-8 py-3 rounded-full"
           >
             See More
-          </Link>
+          </Link> */}
         </div>
 
       </div>

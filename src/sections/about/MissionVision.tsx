@@ -27,27 +27,25 @@ const data = [
 
 const MissionVision = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="pt-6 pb-20 bg-white">  {/* Reduced top spacing so content starts faster */}
       <div className="max-w-7xl mx-auto px-4">
 
-        {/* ===== HEADER ===== */}
-        <div className="text-center mb-16">
+        {/* ===== HEADER (Now starts from top) ===== */}
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Company Mission, Vision and Values
           </h2>
-          {/* <p className="text-gray-500 mt-2">
-            Mission and Vision Template
-          </p> */}
         </div>
 
-        {/* ===== CARDS ===== */}
+        {/* ===== CARDS with Hover Zoom ===== */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md overflow-hidden text-center"
+              className="bg-white rounded-xl shadow-md overflow-hidden text-center 
+              transition-transform duration-300 ease-out hover:scale-[1.05] cursor-pointer"
             >
-              {/* Image */}
+              {/* Image Background */}
               <div
                 className="h-48 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.bg})` }}
@@ -55,7 +53,7 @@ const MissionVision = () => {
                 <div className="h-full bg-black/20"></div>
               </div>
 
-              {/* Icon */}
+              {/* Icon Box */}
               <div
                 className={`w-16 h-16 ${item.color} rounded-xl flex items-center justify-center text-white text-2xl mx-auto -mt-8 shadow-lg`}
               >
@@ -64,10 +62,10 @@ const MissionVision = () => {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold uppercase mb-3">
+                <h3 className="text-xl font-bold uppercase mb-3 text-gray-900">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
                   {item.text}
                 </p>
               </div>
