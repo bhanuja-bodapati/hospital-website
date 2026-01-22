@@ -18,11 +18,11 @@ const Testimonials = () => {
     <section className="bg-gradient-to-b from-purple-50 to-purple-100 px-2 sm:px-4 md:px-6 pb-8">
       {/* Heading */}
       <div className="text-center mb-5">
-        <p className="text-purple-600 text-xs sm:text-sm uppercase tracking-wide">
+        {/* <p className="text-purple-600 text-xs sm:text-sm uppercase tracking-wide">
           Patient Feedback
-        </p>
+        </p> */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-800">
-          Testimonials
+          Reviews
         </h2>
       </div>
 

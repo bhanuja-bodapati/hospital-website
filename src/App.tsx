@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/common/Navbar";
 import Footer from "./Components/common/Footer";
 
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Doctors from "./pages/Doctors";
@@ -34,6 +35,8 @@ const App = () => {
           <Route path="/departments" element={<Departments />} />
           <Route path="/departments/:slug" element={<DepartmentSingle />} />
           <Route path="/contact" element={<Contact/>} />
+         
+
 
         </Routes>
       </main>

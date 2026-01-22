@@ -10,15 +10,14 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-4 relative flex items-center">
 
-        {/* LOGO */}
+        {/* LEFT - LOGO */}
         <Link to="/" className="text-2xl font-bold text-blue-700">
           MediCare
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden md:flex gap-8 text-gray-800 font-semibold items-center">
+        <nav className="hidden md:flex gap-8 text-gray-800 font-semibold items-center absolute left-1/2 -translate-x-1/2">
           <Link
             to="/"
             onClick={() => setActive("Home")}
@@ -43,7 +42,6 @@ const Navbar: React.FC = () => {
             Departments
           </Link>
 
-          {/* DOCTORS (Direct link, dropdown removed) */}
           <Link
             to="/doctors"
             onClick={() => setActive("Doctors")}
@@ -61,9 +59,8 @@ const Navbar: React.FC = () => {
           </Link>
         </nav>
 
-        {/* MOBILE BUTTON */}
         <button
-          className="md:hidden flex flex-col gap-1"
+          className="ml-auto flex flex-col gap-1"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="w-6 h-0.5 bg-gray-800"></span>
@@ -72,64 +69,31 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+     
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
+        <div className="bg-white border-t border-gray-200">
           <nav className="flex flex-col px-6 py-4 gap-4 text-gray-900 font-semibold">
-            <Link
-              to="/"
-              className="py-2 text-lg hover:text-blue-600 transition"
-              onClick={() => {
-                setActive("Home");
-                setIsOpen(false);
-              }}
-            >
+
+            <Link to="/" onClick={() => { setActive("Home"); setIsOpen(false); }}> 
               Home
             </Link>
 
-            <Link
-              to="/about"
-              className="py-2 text-lg hover:text-blue-600 transition"
-              onClick={() => {
-                setActive("About");
-                setIsOpen(false);
-              }}
-            >
+            <Link to="/about" onClick={() => { setActive("About"); setIsOpen(false); }}>
               About Us
             </Link>
 
-            <Link
-              to="/departments"
-              className="py-2 text-lg hover:text-blue-600 transition"
-              onClick={() => {
-                setActive("Departments");
-                setIsOpen(false);
-              }}
-            >
+            <Link to="/departments" onClick={() => { setActive("Departments"); setIsOpen(false); }}>
               Departments
             </Link>
 
-            <Link
-              to="/doctors"
-              className="py-2 text-lg hover:text-blue-600 transition"
-              onClick={() => {
-                setActive("Doctors");
-                setIsOpen(false);
-              }}
-            >
+            <Link to="/doctors" onClick={() => { setActive("Doctors"); setIsOpen(false); }}>
               Doctors
             </Link>
 
-            <Link
-              to="/contact"
-              className="py-2 text-lg hover:text-blue-600 transition"
-              onClick={() => {
-                setActive("Contact");
-                setIsOpen(false);
-              }}
-            >
+            <Link to="/contact" onClick={() => { setActive("Contact"); setIsOpen(false); }}>
               Contact Us
             </Link>
+
           </nav>
         </div>
       )}

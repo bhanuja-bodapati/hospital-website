@@ -2,7 +2,7 @@ import AboutHero from "../sections/about/AboutHero";
 import MissionVision from "../sections/about/MissionVision";
 
 import AboutServicesSection from "../sections/about/AboutServicesSection";
-import AboutDoctorsSection from "../sections/about/AboutDoctorsSection";
+// import AboutDoctorsSection from "../sections/about/AboutDoctorsSection";
 import AboutCTA from "../sections/about/AboutCTA";
 
 const About = () => {
@@ -12,7 +12,7 @@ const About = () => {
       <MissionVision />
       
       <AboutServicesSection/>
-      <AboutDoctorsSection/>
+      {/* <AboutDoctorsSection/> */}
       <AboutCTA />
     </>
   );
